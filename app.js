@@ -18,13 +18,15 @@ const io = new socketIo.Server(server, {
     },
   });
 
+let eventCount=0;
 
 // Ruta para el método GET que emite un evento al socket
 app.get('/emit-event', (req, res) => {
   // Emitir un evento al socket llamado "custom-event"
     // Generar un número aleatorio entre 1 y 100
-    const randomNumber = Math.floor(Math.random() * 100000) + 1;
-  io.emit('custom-event', { message: '¡random number:'+ randomNumber });
+    //const randomNumber = Math.floor(Math.random() * 100000) + 1;
+    eventCount=eventCount+1;
+  io.emit('custom-event', { message: 'events server: '+ eventCount });
   res.send('Evento emitido al socket.');
 });
 
