@@ -24,7 +24,7 @@ app.get('/emit-event', (req, res) => {
   // Emitir un evento al socket llamado "custom-event"
     // Generar un número aleatorio entre 1 y 100
     const randomNumber = Math.floor(Math.random() * 100000) + 1;
-  io.emit('custom-event', { message: '¡randfom number:'+ randomNumber });
+  io.emit('custom-event', { message: '¡random number:'+ randomNumber });
   res.send('Evento emitido al socket.');
 });
 
