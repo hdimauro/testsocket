@@ -17,6 +17,10 @@ app.get('/emit-event', (req, res) => {
   res.send('Evento emitido al socket.');
 });
 
+app.get('/', (req, res) => {
+       res.send('api socket up.');
+  });
+
 // Iniciar el servidor en el puerto 3000
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
