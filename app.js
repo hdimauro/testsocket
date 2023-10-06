@@ -26,7 +26,7 @@ app.get('/notificar', (req, res) => {
   res.send('Evento emitido al socket.');
 });
 
-app.get('actualizarTareaOT/:id', (req, res) => {
+app.get('/actualizarTareaOT/:id', (req, res) => {
     const id = req.params.id; 
     io.emit('actualizarTareasOT', { id: id});
     res.send('Send ' + id);
