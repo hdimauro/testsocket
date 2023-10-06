@@ -22,7 +22,9 @@ const io = new socketIo.Server(server, {
 // Ruta para el método GET que emite un evento al socket
 app.get('/emit-event', (req, res) => {
   // Emitir un evento al socket llamado "custom-event"
-  io.emit('custom-event', { message: '¡Este es un evento personalizado!' });
+    // Generar un número aleatorio entre 1 y 100
+    const randomNumber = Math.floor(Math.random() * 100000) + 1;
+  io.emit('custom-event', { message: '¡randfom number:'+ randomNumber });
   res.send('Evento emitido al socket.');
 });
 
