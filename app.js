@@ -21,17 +21,15 @@ const io = new socketIo.Server(server, {
 let eventCount=0;
 
 // Ruta para el método GET que emite un evento al socket
-app.get('/emit-event', (req, res) => {
-  // Emitir un evento al socket llamado "custom-event"
-    // Generar un número aleatorio entre 1 y 100
-    //const randomNumber = Math.floor(Math.random() * 100000) + 1;
-    eventCount=eventCount+1;
-  io.emit('custom-event', { message: 'events server: '+ eventCount });
+app.get('/notificar', (req, res) => {
+  io.emit('notificar', { usuarios: [] });
   res.send('Evento emitido al socket.');
 });
 
-app.get('/', (req, res) => {
-       res.send('api socket up Herni');
+app.get('actualizarTareaOT/:id', (req, res) => {
+    const id = req.params.id; 
+    io.emit('actualizarTareasOT', { id: id});
+    res.send('Send ' + id);
   });
 
 // Iniciar el servidor en el puerto 3000
@@ -42,10 +40,10 @@ server.listen(PORT, () => {
 
 // Configurar Socket.io para escuchar conexiones
 io.on('connection', (socket) => {
-  console.log('Un cliente se ha conectado al socket.');
+    console.log('Un cliente se ha conectado al socket con ID:', socket.id);
 
-  // Manejar eventos del socket, si es necesario
-  socket.on('disconnect', () => {
-    console.log('Un cliente se ha desconectado del socket.');
-  });
+    // Manejar eventos del socket, si es necesario
+    socket.on('disconnect', () => {
+      console.log('El cliente con ID', socket.id, 'se ha desconectado del socket.');
+    });
 });
