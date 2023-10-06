@@ -31,7 +31,7 @@ app.get('/emit-event', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-       res.send('api socket up.');
+       res.send('api socket up Herni');
   });
 
 // Iniciar el servidor en el puerto 3000
