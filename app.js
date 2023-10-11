@@ -20,6 +20,44 @@ const io = new socketIo.Server(server, {
 
 let eventCount=0;
 
+let agregar=false;
+let consultar=true;
+let editar=false;
+let eliminar=false;
+
+
+app.get('/getPermisos', (req, res) => {
+  res.send({agregar:agregar,editar:editar,consultar:consultar,eliminar:eliminar});
+});
+
+
+app.get('/editar', (req, res) => {
+  editar=(req.query.valor === "true") ? true : false;
+  io.emit('editar', editar);
+  res.send({agregar:agregar,editar:editar,consultar:consultar,eliminar:eliminar});
+});
+
+
+app.get('/agregar', (req, res) => {
+  agregar=(req.query.valor === "true") ? true : false;
+  io.emit('agregar', agregar);
+  res.send({agregar:agregar,editar:editar,consultar:consultar,eliminar:eliminar});
+});
+
+app.get('/eliminar', (req, res) => {
+  eliminar=(req.query.valor === "true") ? true : false;
+  io.emit('eliminar', eliminar)
+  res.send({agregar:agregar,editar:editar,consultar:consultar,eliminar:eliminar});
+});
+
+
+app.get('/consultar', (req, res) => {
+  consultar=(req.query.valor === "true") ? true : false;
+  io.emit('consultar', consultar)
+  res.send({agregar:agregar,editar:editar,consultar:consultar,eliminar:eliminar});
+});
+
+
 // Ruta para el método GET que emite un evento al socket
 app.get('/notificar', (req, res) => {
   io.emit('notificar', { usuarios: [] });
